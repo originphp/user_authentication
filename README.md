@@ -1,5 +1,7 @@
 # User Management Plugin
 
+A common theme when creating web applications, is registering users, changing password, verifying the email address. This plugin takes less than 2 minutes to add to your application. More features coming soon.
+
 ### Installation
 
 Install the the User Management using the `plugin:install` command
@@ -11,12 +13,18 @@ $ bin/console plugin:install originphp/user_management
 Load the `AuthComponent` in the `AppController` initialize method.
 
 ```php
-$this->loadComponent('Auth', [
-    'loginAction' => '/login',
-    'loginRedirect' => '/home',
-    'logoutRedirect' => '/login',
-    'model' => 'UserManagement.User'
-]);
+class AppController extends Controller
+{
+    public function initialize()
+    {
+        $this->loadComponent('Auth', [
+            'loginAction' => '/login',
+            'loginRedirect' => '/home',
+            'logoutRedirect' => '/login',
+            'model' => 'UserManagement.User'
+        ]);
+    }
+}
 ```
 
 Load database schema for the User (you can change this later)
@@ -70,9 +78,9 @@ class User extends AppModel
 
 ## Testing The Plugin
 
-The controller integration test requires your is configured first, but other tests do not need this.
+The controller integration test requires your Controller is configured first, but other tests will run fine without this.
 
-If the User schema and queue schema is in your database/schema.php file then to run the tests it would be like this
+If the User schema and queue schema is in your `database/schema.php` file then to run the tests run the following commands
 
 ```linux
 $ bin/console db:test:prepare
@@ -80,7 +88,7 @@ $ cd plugins/user_management
 $ phpunit
 ```
 
-If you have an empty database
+If your database and schema.php is empty, then 
 
 ```linux
 $ bin/console db:create --datasource=test
