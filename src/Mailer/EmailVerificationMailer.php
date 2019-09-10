@@ -14,6 +14,7 @@ class EmailVerificationMailer extends AppMailer
         $this->user = $user;
         $this->url = Config::read('App.url');
         $this->code = $code;
+        $this->app = Config::read('App.name');
         
         $this->mail([
             'to' => $user->email,

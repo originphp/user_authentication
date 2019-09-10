@@ -13,7 +13,8 @@ class ResetPasswordMailer extends AppMailer
     {
         $this->user = $user;
         $this->url = Config::read('App.url') . '/change_password/' . $uuid;
-               
+        $this->app = Config::read('App.name');
+        
         $this->mail([
             'to' => $user->email,
             'subject' => 'Password Reset'
