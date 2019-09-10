@@ -2,10 +2,10 @@
 
 ### Installation
 
-Load plugin in `config/bootstrap.php`
+Install the the User Management using the `plugin:install` command
 
-```php
-Plugin::load('UserManagement');
+```linux
+$ bin/console plugin:install originphp/user_management
 ```
 
 Load the `AuthComponent` in the `AppController` initialize method.
@@ -72,10 +72,20 @@ class User extends AppModel
 
 The controller integration test requires your is configured first, but other tests do not need this.
 
+If the User schema and queue schema is in your database/schema.php file then to run the tests it would be like this
+
 ```linux
 $ bin/console db:test:prepare
+$ cd plugins/user_management
+$ phpunit
+```
+
+If you have an empty database
+
+```linux
+$ bin/console db:create --datasource=test
 $ bin/console db:schema:load --datasource=test UserManagement.schema
 $ bin/console db:schema:load --datasource=test queue
 $ cd plugins/user_management
 $ phpunit
-````
+```
