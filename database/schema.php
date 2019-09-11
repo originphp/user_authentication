@@ -19,9 +19,9 @@ class ApplicationSchema extends Schema
             'modified' => ['type' => 'datetime', 'null' => false, 'default' => null]
         ],
         'constraints' => [
-            'primary' => ['type' => 'primary', 'column' => 'id', 'autoIncrement' => 1000]
+            'primary' => ['type' => 'primary', 'column' => 'id']
         ],
         'indexes' => [],
-        'options' => ['engine' => 'InnoDB']
+        'options' => ['engine' => 'InnoDB', 'autoIncrement' => 1000]
     ];
 }
