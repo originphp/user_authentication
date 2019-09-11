@@ -16,6 +16,7 @@ class User extends AppModel
         $this->validate('email', [
             ['rule'=>'notBlank'],
             ['rule'=>'customEmail','allowBlank' => false,'message'=>'Invalid email address'],
+            ['rule' => 'isUnique','message' => 'Email address already in use','allowBlank' => true],
         ]);
         $this->validate('password', [
             'rule' => 'alphaNumeric',
