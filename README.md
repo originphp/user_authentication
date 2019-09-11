@@ -20,7 +20,7 @@ This plugin provides the following routes:
 Install the the `UserAuthentication` plugin using the `plugin:install` command
 
 ```linux
-$ bin/console plugin:install originphp/user_management
+$ bin/console plugin:install originphp/user_authentication
 ```
 
 > The plugin:install command requires that the git command line tools are installed
