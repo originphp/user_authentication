@@ -1,17 +1,6 @@
 # User Authentication Plugin
 
-A common theme when creating web applications, is user registration, sending a welcome email, changing passwords, verifying the email address. This plugin takes less than 2 minutes to add to your application.
-
-This plugin provides the following routes:
-
-* login
-* logout
-* signup
-* forgot_password
-* change_password
-* verify
-* token
-* profile
+The User Authentication plugin, provides user registration, sending a welcome emails, changing passwords, verifying user email addresses using email notifications. This plugin takes less than 2 minutes to add to your application and provides you with everything you need to get started.
 
 ## Installation
 
@@ -46,7 +35,7 @@ class AppController extends Controller
     {
         $this->loadComponent('Auth', [
             'loginAction' => '/login',
-            'loginRedirect' => '/home',
+            'loginRedirect' => '/profile', # Set this to something valid
             'logoutRedirect' => '/login',
             'model' => 'UserAuthentication.User'
         ]);
@@ -71,56 +60,43 @@ Set the `App.name` value in your `config/application.php`
 ```php
 Config::write('App.name','Web Application');
 ```
+## Usage
 
-# Custom User Model
+To signup
 
-You will probably want to use a custom User model, if you do, just take out the model configuration when loading the `Auth Component`, this will then load your `App\User` model. All you need is the `beforeSave` callback to hash the password if it was modified.
+[http://localhost:8000/signup](http://localhost:8000/signup)
 
-```php
-$this->loadComponent('Auth', [
-    'loginAction' => '/login',
-    'loginRedirect' => '/home',
-    'logoutRedirect' => '/login'
-]);
-```
+To login
 
-And then create `App/Model/User.php`
+[http://localhost:8000/login](http://localhost:8000/login)
 
-```php
-namespace App\Model;
+> This will take you to the  `loginRedirect` setting you setup in your AppController
 
-use Origin\Model\Entity;
-use Origin\Utility\Security;
+To start the password reset process
 
-class User extends AppModel
-{
-    public function beforeSave(Entity $entity, array $options = [])
-    {
-        if (! empty($entity->password) and in_array('password', $entity->modified())) {
-            $entity->password = Security::hashPassword($entity->password);
-        }
-    }
-}
-```
+[http://localhost:8000/forgot_password](http://localhost:8000/forgot_password)
+
+To view or edit your user profile
+
+[http://localhost:8000/profile](http://localhost:8000/profile)
+
+To view the API token
+
+[http://localhost:8000/token](http://localhost:8000/token)
+
+> If you are not going to be using API tokens then you can remove the route from `config/routes.php`
+
+## What Next
+
+Now its all working fine, it is time to copy the schema for the User Authentication plugin and the queues into your `application/schema.php`.
 
 ## Testing The Plugin
 
-The controller integration test requires your Controller is configured first, but other tests will run fine without this.
+The controller integration test requires your `AppController` loads the `AuthComponent`, but other tests will run fine without this.
 
-If the User schema and queue schema is in your `database/schema.php` file then to run the tests run the following commands
-
-```linux
-$ bin/console db:test:prepare
-$ cd plugins/user_management
-$ phpunit
-```
-
-If your database and schema.php is empty, then 
+Load the schema for the `UserAuthentication` plugin and queues into the test database
 
 ```linux
-$ bin/console db:create --datasource=test
 $ bin/console db:schema:load --datasource=test UserAuthentication.schema
 $ bin/console db:schema:load --datasource=test queue
-$ cd plugins/user_management
-$ phpunit
 ```
