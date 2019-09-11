@@ -16,7 +16,7 @@ $ bin/console plugin:install originphp/user_authentication
 
 ### Manually
 
-To install the plugin manually, download the source into `plugins/user_management`.
+To install the plugin manually, download the source into `plugins/user_authentication`.
 
 Add the following line to `config/bootstrap.php`
 
