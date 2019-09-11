@@ -2,10 +2,10 @@
 namespace UserAuthentication\Controller;
 
 use App\Controller\AppController;
-use App\Mailer\WelcomeEmailMailer;
 use Origin\Model\Entity;
 use UserAuthentication\Mailer\EmailVerificationMailer;
 use UserAuthentication\Mailer\ResetPasswordMailer;
+use UserAuthentication\Mailer\WelcomeEmailMailer;
 use Origin\Exception\InternalErrorException;
 use Origin\Exception\NotFoundException;
 use Origin\Utility\Security;
