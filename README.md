@@ -1,14 +1,41 @@
-# User Management Plugin
+# User Authentication Plugin
 
-A common theme when creating web applications, is registering users, changing password, verifying the email address. This plugin takes less than 2 minutes to add to your application. More features coming soon.
+A common theme when creating web applications, is user registration, sending a welcome email, changing passwords, verifying the email address. This plugin takes less than 2 minutes to add to your application.
 
-### Installation
+This plugin provides the following routes:
 
-Install the the User Management using the `plugin:install` command
+* login
+* logout
+* signup
+* forgot_password
+* change_password
+* verify
+* token
+* profile
+
+## Installation
+
+### Automated
+
+Install the the `UserAuthentication` plugin using the `plugin:install` command
 
 ```linux
 $ bin/console plugin:install originphp/user_management
 ```
+
+> The plugin:install command requires that the git command line tools are installed
+
+### Manually
+
+To install the plugin manually, download the source into `plugins/user_management`.
+
+Add the following line to `config/bootstrap.php`
+
+```php
+Plugin::load('UserAuthentication');
+```
+
+## Setup
 
 Load the `AuthComponent` in the `AppController` initialize method.
 
@@ -21,7 +48,7 @@ class AppController extends Controller
             'loginAction' => '/login',
             'loginRedirect' => '/home',
             'logoutRedirect' => '/login',
-            'model' => 'UserManagement.User'
+            'model' => 'UserAuthentication.User'
         ]);
     }
 }
@@ -30,7 +57,7 @@ class AppController extends Controller
 Load database schema for the User (you can change this later)
 
 ```linux
-$ bin/console db:schema:load UserManagement.schema
+$ bin/console db:schema:load UserAuthentication.schema
 ```
 
 Load the Queue schema, which use for sending reset password and email verification notices.
@@ -92,7 +119,7 @@ If your database and schema.php is empty, then
 
 ```linux
 $ bin/console db:create --datasource=test
-$ bin/console db:schema:load --datasource=test UserManagement.schema
+$ bin/console db:schema:load --datasource=test UserAuthentication.schema
 $ bin/console db:schema:load --datasource=test queue
 $ cd plugins/user_management
 $ phpunit

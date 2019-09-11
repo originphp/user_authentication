@@ -1,9 +1,9 @@
 <?php
-namespace UserManagement\Test\Mailer;
+namespace UserAuthentication\Test\Mailer;
 
 use Origin\TestSuite\OriginTestCase;
 use Origin\Model\Entity;
-use UserManagement\Mailer\ResetPasswordMailer;
+use UserAuthentication\Mailer\ResetPasswordMailer;
 
 class ResetPasswordMailerTest extends OriginTestCase
 {

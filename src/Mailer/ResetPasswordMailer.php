@@ -1,5 +1,5 @@
 <?php
-namespace UserManagement\Mailer;
+namespace UserAuthentication\Mailer;
 
 use App\Mailer\AppMailer;
 use Origin\Core\Config;
@@ -7,7 +7,7 @@ use Origin\Model\Entity;
 
 class ResetPasswordMailer extends AppMailer
 {
-    public $folder = 'UserManagement.ResetPassword';
+    public $folder = 'UserAuthentication.ResetPassword';
 
     public function execute(Entity $user, string $uuid)
     {

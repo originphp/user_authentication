@@ -1,18 +1,21 @@
 <?php
-namespace UserManagement\Controller;
+namespace UserAuthentication\Controller;
 
+use App\Controller\AppController;
+use App\Mailer\WelcomeEmailMailer;
 use Origin\Model\Entity;
-use UserManagement\Mailer\EmailVerificationMailer;
-use UserManagement\Mailer\ResetPasswordMailer;
+use UserAuthentication\Mailer\EmailVerificationMailer;
+use UserAuthentication\Mailer\ResetPasswordMailer;
 use Origin\Exception\InternalErrorException;
 use Origin\Exception\NotFoundException;
+use Origin\Utility\Security;
 
 /**
- * @property \App\Model\User $User
+ * @property \UserAuthentication\Model\User $User
  */
-class UsersController extends UserManagementAppController
+class UsersController extends AppController
 {
-    public $layout = 'UserManagement.form';
+    public $layout = 'UserAuthentication.form';
     
     public function initialize()
     {
@@ -30,6 +33,10 @@ class UsersController extends UserManagementAppController
             $user = $this->User->new($this->request->data());
 
             if ($this->User->save($user)) {
+                if (! (new WelcomeEmailMailer())->dispatchLater($user)) {
+                    throw new InternalErrorException('Error dispatching mailer');
+                }
+
                 $this->Flash->success(__('Your account has been created.'));
 
                 return $this->redirect('/login');
@@ -102,7 +109,6 @@ class UsersController extends UserManagementAppController
             throw new NotFoundException('Not found');
         }
         if ($this->request->is(['post'])) {
-            $user = $this->User->new();
             $user->id = $this->Session->read('PasswordReset.user_id');
        
             $user->password = $this->request->data('password');
@@ -125,6 +131,45 @@ class UsersController extends UserManagementAppController
         return $this->redirect($this->Auth->logout());
     }
 
+    public function token()
+    {
+        $this->layout = 'default';
+        $userId = $this->Auth->user('id');
+        $user = $this->User->get($userId);
+
+        if ($this->request->is(['post'])) {
+            $user->token = Security::uuid();
+            if ($this->User->save($user)) {
+                $this->Flash->success(__('Your API token has been changed'));
+                $this->Auth->login($user);
+            } else {
+                $this->Flash->error(__('Unable to issue a new API Token'));
+            }
+        }
+
+        $this->set('user', $user);
+    }
+
+    public function profile()
+    {
+        $this->layout = 'default';
+        
+        $user = $this->User->get($this->Auth->user('id'));
+
+        if ($this->request->is(['post'])) {
+            $user = $this->User->patch($user, $this->request->data(), [
+                'fields' => ['first_name','last_name','email']
+            ]);
+      
+            if ($this->User->save($user)) {
+                $this->Flash->success(__('Your profile has been updated.'));
+                $this->Auth->login($user);
+            } else {
+                $this->Flash->error(__('Your profile could not be updated.'));
+            }
+        }
+        $this->set('user', $user);
+    }
 
     private function sendResetPasswordMailer(Entity $user)
     {

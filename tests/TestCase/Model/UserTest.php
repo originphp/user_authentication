@@ -1,5 +1,5 @@
 <?php
-namespace UserManagement\Test\Model;
+namespace UserAuthentication\Test\Model;
 
 use Origin\TestSuite\OriginTestCase;
 
@@ -8,11 +8,11 @@ use Origin\TestSuite\OriginTestCase;
  */
 class UserTest extends OriginTestCase
 {
-    public $fixtures = ['UserManagement.User'];
+    public $fixtures = ['UserAuthentication.User'];
 
     public function startup()
     {
-        $this->loadModel('UserManagement.User');
+        $this->loadModel('UserAuthentication.User');
     }
 
     public function testBeforeSave()

@@ -4,7 +4,7 @@
  */
 use Origin\Core\Config;
 
-echo $this->Html->css('UserManagement.form');
+echo $this->Html->css('UserAuthentication.form');
 ?>
 <div class="form-header">
    <h2><?= Config::read('App.name'); ?></h2>

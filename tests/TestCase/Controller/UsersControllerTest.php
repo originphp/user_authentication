@@ -1,5 +1,5 @@
 <?php
-namespace UserManagement\Test\Controller;
+namespace UserAuthentication\Test\Controller;
 
 use Origin\TestSuite\OriginTestCase;
 use Origin\TestSuite\IntegrationTestTrait;
@@ -15,11 +15,11 @@ class UsersControllerTest extends OriginTestCase
 {
     use IntegrationTestTrait;
 
-    public $fixtures = ['UserManagement.User'];
+    public $fixtures = ['UserAuthentication.User'];
 
     public function startup()
     {
-        $this->loadModel('UserManagement.User');
+        $this->loadModel('UserAuthentication.User');
     }
 
     public function testLogin()
@@ -96,6 +96,8 @@ class UsersControllerTest extends OriginTestCase
         $this->assertResponseContains('<p>Enter the verification code you received in the email.</p>');
     }
 
+    
+
     public function testVerifyPost()
     {
         $this->session([
@@ -107,5 +109,36 @@ class UsersControllerTest extends OriginTestCase
             'code' => 123456
         ]);
         $this->assertRedirect('/login');
+    }
+
+    public function testTokenNotLoggedIn()
+    {
+        $this->get('/token');
+        $this->assertRedirect('/login');
+    }
+
+    public function testToken()
+    {
+        $user = $this->User->find('first');
+        $this->session([
+            'Auth.User' => $user->toArray()
+        ]);
+        $this->get('/token');
+        $this->assertResponseOk();
+        $this->assertResponseContains('3905604a-b14d-4fe8-906e-7867b39289b3');
+    }
+
+    public function testTokenChange()
+    {
+        $user = $this->User->find('first');
+        $this->session([
+            'Auth.User' => $user->toArray()
+        ]);
+        $this->post('/token');
+        $this->assertResponseOk();
+        $this->assertResponseNotContains('3905604a-b14d-4fe8-906e-7867b39289b3');
+        $newUser = $this->User->find('first');
+        $this->assertNotEquals($newUser->token, $user->token);
+        $this->assertResponseContains($newUser->token);
     }
 }
