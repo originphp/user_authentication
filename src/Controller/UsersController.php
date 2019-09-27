@@ -17,7 +17,7 @@ class UsersController extends AppController
 {
     public $layout = 'UserAuthentication.form';
     
-    public function initialize()
+    public function initialize() : void
     {
         parent::initialize();
         $this->Auth->allow([

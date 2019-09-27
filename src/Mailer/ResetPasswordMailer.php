@@ -9,7 +9,7 @@ class ResetPasswordMailer extends AppMailer
 {
     public $folder = 'UserAuthentication.ResetPassword';
 
-    public function execute(Entity $user, string $uuid)
+    public function execute(Entity $user, string $uuid) : void
     {
         $this->user = $user;
         $this->url = Config::read('App.url') . '/change_password/' . $uuid;

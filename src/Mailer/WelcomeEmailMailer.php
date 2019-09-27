@@ -9,7 +9,7 @@ class WelcomeEmailMailer extends AppMailer
 {
     public $folder = 'UserAuthentication.WelcomeEmail';
 
-    public function execute(Entity $user)
+    public function execute(Entity $user) : void
     {
         $this->user = $user;
         $this->url = Config::read('App.url');

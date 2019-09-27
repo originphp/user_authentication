@@ -17,7 +17,7 @@ class UsersControllerTest extends OriginTestCase
 
     public $fixtures = ['UserAuthentication.User'];
 
-    public function startup()
+    public function startup() : void
     {
         $this->loadModel('UserAuthentication.User');
     }

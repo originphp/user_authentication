@@ -9,7 +9,7 @@ class EmailVerificationMailer extends AppMailer
 {
     public $folder = 'UserAuthentication.EmailVerification';
     
-    public function execute(Entity $user, int $code)
+    public function execute(Entity $user, int $code) : void
     {
         $this->user = $user;
         $this->url = Config::read('App.url');

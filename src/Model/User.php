@@ -9,7 +9,7 @@ use ArrayObject;
 
 class User extends AppModel
 {
-    public function initialize(array $config)
+    public function initialize(array $config) : void
     {
         parent::initialize($config);
 
@@ -31,9 +31,9 @@ class User extends AppModel
      *
      * @param \Origin\Model\Entity $entity
      * @param ArrayObject $options
-     * @return bool must return true to continue
+     * @return bool
      */
-    public function beforeSave(Entity $entity, ArrayObject $options)
+    public function beforeSave(Entity $entity, ArrayObject $options) : bool
     {
         if ($entity->id === null) {
             $entity->token = Security::uuid();
@@ -50,7 +50,7 @@ class User extends AppModel
      * @param string $email
      * @return bool
      */
-    public function customEmail(string $email): bool
+    public function customEmail(string $email) : bool
     {
         $mxhosts = null;
         if (filter_var($email, FILTER_VALIDATE_EMAIL) !== false) {
