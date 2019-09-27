@@ -173,13 +173,13 @@ class UsersController extends AppController
 
     private function sendResetPasswordMailer(Entity $user)
     {
-        $uuid = uid();
+        $uid = Security::uid();
 
         # Create Session Details
         $this->Session->write('PasswordReset.user_id', $user->id);
-        $this->Session->write('PasswordReset.code', $uuid);
+        $this->Session->write('PasswordReset.code', $uid);
 
-        if (! (new ResetPasswordMailer())->dispatchLater($user, $uuid)) {
+        if (! (new ResetPasswordMailer())->dispatchLater($user, $uid)) {
             throw new InternalErrorException('Error dispatching mailer');
         }
     }
