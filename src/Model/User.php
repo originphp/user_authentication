@@ -2,12 +2,12 @@
 
 namespace UserAuthentication\Model;
 
-use App\Model\AppModel;
+use App\Model\ApplicationModel;
 use Origin\Model\Entity;
 use Origin\Utility\Security;
 use ArrayObject;
 
-class User extends AppModel
+class User extends ApplicationModel
 {
     public function initialize(array $config) : void
     {
@@ -41,6 +41,7 @@ class User extends AppModel
         if (!empty($entity->password) and in_array('password', $entity->modified())) {
             $entity->password = Security::hashPassword($entity->password);
         }
+        return true;
     }
 
     /**

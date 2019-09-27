@@ -3,7 +3,7 @@ namespace UserAuthentication\Test\Controller;
 
 use Origin\TestSuite\OriginTestCase;
 use Origin\TestSuite\IntegrationTestTrait;
-
+use Origin\Utility\Security;
 /**
  * # IMPORTANT
  * For integration testing to work you need to load the AuthComponent in the AppController and for the Plugin to be loaded
@@ -55,7 +55,7 @@ class UsersControllerTest extends OriginTestCase
 
     public function testChangePassword()
     {
-        $uid = uid();
+        $uid = Security::uid();
         $this->session([
             'PasswordReset.user_id' => 1000,
             'PasswordReset.code' => $uid
@@ -73,7 +73,7 @@ class UsersControllerTest extends OriginTestCase
 
     public function testChangePasswordPost()
     {
-        $uid = uid();
+        $uid = Security::uid();
         $this->session([
             'PasswordReset.user_id' => 1000,
             'PasswordReset.code' => $uid

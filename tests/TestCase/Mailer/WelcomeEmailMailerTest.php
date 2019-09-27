@@ -14,9 +14,9 @@ class WelcomeEmailMailerTest extends OriginTestCase
         $user->email = 'jim@originphp.com';
 
         $message = (new WelcomeEmailMailer())->dispatch($user, 123456);
-        $this->assertContains('To: jim@originphp.com', $message->header());
-        $this->assertContains('From: Web Application <no-reply@example.com>', $message->header());
-        $this->assertContains('<p>Thank you for signing up</p>', $message->body());
-        $this->assertContains('Hi Jim', $message->body());
+        $this->assertStringContainsString('To: jim@originphp.com', $message->header());
+        $this->assertStringContainsString('From: Web Application <no-reply@example.com>', $message->header());
+        $this->assertStringContainsString('<p>Thank you for signing up</p>', $message->body());
+        $this->assertStringContainsString('Hi Jim', $message->body());
     }
 }

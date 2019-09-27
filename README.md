@@ -26,10 +26,10 @@ Plugin::load('UserAuthentication');
 
 ## Setup
 
-Load the `AuthComponent` in the `AppController` initialize method.
+Load the `AuthComponent` in the `AppLicationcontroller` initialize method.
 
 ```php
-class AppController extends Controller
+class AppLicationcontroller extends Controller
 {
     public function initialize()
     {
@@ -70,7 +70,7 @@ To login
 
 [http://localhost:8000/login](http://localhost:8000/login)
 
-> This will take you to the  `loginRedirect` setting you setup in your AppController
+> This will take you to the  `loginRedirect` setting you setup in your AppLicationcontroller
 
 To start the password reset process
 
@@ -92,7 +92,7 @@ Now its all working fine, it is time to copy the schema for the User Authenticat
 
 ## Testing The Plugin
 
-The controller integration test requires your `AppController` loads the `AuthComponent`, but other tests will run fine without this.
+The controller integration test requires your `AppLicationcontroller` loads the `AuthComponent`, but other tests will run fine without this.
 
 Load the schema for the `UserAuthentication` plugin and queues into the test database
 

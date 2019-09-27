@@ -1,11 +1,11 @@
 <?php
 namespace UserAuthentication\Mailer;
 
-use App\Mailer\AppMailer;
+use App\Mailer\ApplicationMailer;
 use Origin\Core\Config;
 use Origin\Model\Entity;
 
-class ResetPasswordMailer extends AppMailer
+class ResetPasswordMailer extends ApplicationMailer
 {
     public $folder = 'UserAuthentication.ResetPassword';
 

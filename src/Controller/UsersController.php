@@ -1,19 +1,19 @@
 <?php
 namespace UserAuthentication\Controller;
 
-use App\Controller\AppController;
+use App\Controller\ApplicationController;
 use Origin\Model\Entity;
 use UserAuthentication\Mailer\EmailVerificationMailer;
 use UserAuthentication\Mailer\ResetPasswordMailer;
 use UserAuthentication\Mailer\WelcomeEmailMailer;
 use Origin\Exception\InternalErrorException;
-use Origin\Exception\NotFoundException;
+use Origin\Http\Exception\NotFoundException;
 use Origin\Utility\Security;
 
 /**
  * @property \UserAuthentication\Model\User $User
  */
-class UsersController extends AppController
+class UsersController extends ApplicationController
 {
     public $layout = 'UserAuthentication.form';
     
@@ -88,6 +88,10 @@ class UsersController extends AppController
         $user = $this->User->new();
         if ($this->request->is(['post'])) {
             $user = $this->User->new($this->request->data());
+
+            # Overwrite validation rule for email
+            $this->User->validate('email', 'email');
+
             if ($this->User->validates($user)) {
                 $user = $this->User->find('first', [
                     'conditions' => ['email' => $this->request->data('email')]

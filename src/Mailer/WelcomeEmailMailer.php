@@ -1,11 +1,11 @@
 <?php
 namespace UserAuthentication\Mailer;
 
-use App\Mailer\AppMailer;
+use App\Mailer\ApplicationMailer;
 use Origin\Core\Config;
 use Origin\Model\Entity;
 
-class WelcomeEmailMailer extends AppMailer
+class WelcomeEmailMailer extends ApplicationMailer
 {
     public $folder = 'UserAuthentication.WelcomeEmail';
 

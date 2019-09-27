@@ -4,6 +4,8 @@ namespace UserAuthentication\Test\Mailer;
 use Origin\TestSuite\OriginTestCase;
 use Origin\Model\Entity;
 use UserAuthentication\Mailer\ResetPasswordMailer;
+use Origin\Utility\Security;
+use Origin\Core\Config;
 
 class ResetPasswordMailerTest extends OriginTestCase
 {
@@ -13,11 +15,12 @@ class ResetPasswordMailerTest extends OriginTestCase
         $user->first_name = 'Jim';
         $user->email = 'jim@originphp.com';
 
-        $code = uuid();
+        $code = Security::uuid();
+        $url = Config::read('App.url');
      
         $message = (new ResetPasswordMailer())->dispatch($user, $code);
-        $this->assertContains('To: jim@originphp.com', $message->header());
-        $this->assertContains('From: Web Application <no-reply@example.com>', $message->header());
-        $this->assertContains('<a href="http://localhost:8000/change_password/' . $code .'">', $message->body());
+        $this->assertStringContainsString('To: jim@originphp.com', $message->header());
+        $this->assertStringContainsString('From: Web Application <no-reply@example.com>', $message->header());
+        $this->assertStringContainsString('<a href="'.$url.'/change_password/' . $code .'">', $message->body());
     }
 }
