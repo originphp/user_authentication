@@ -1,7 +1,7 @@
 <?php
-namespace UserAuthentication\Controller;
+namespace UserAuthentication\Http\Controller;
 
-use App\Controller\ApplicationController;
+use App\Http\Controller\ApplicationController;
 use Origin\Model\Entity;
 use UserAuthentication\Mailer\EmailVerificationMailer;
 use UserAuthentication\Mailer\ResetPasswordMailer;

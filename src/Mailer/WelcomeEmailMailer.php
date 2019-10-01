@@ -7,8 +7,6 @@ use Origin\Model\Entity;
 
 class WelcomeEmailMailer extends ApplicationMailer
 {
-    public $folder = 'UserAuthentication.WelcomeEmail';
-
     public function execute(Entity $user) : void
     {
         $this->user = $user;

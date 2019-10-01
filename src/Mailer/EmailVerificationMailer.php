@@ -7,8 +7,6 @@ use Origin\Model\Entity;
 
 class EmailVerificationMailer extends ApplicationMailer
 {
-    public $folder = 'UserAuthentication.EmailVerification';
-    
     public function execute(Entity $user, int $code) : void
     {
         $this->user = $user;

@@ -7,8 +7,6 @@ use Origin\Model\Entity;
 
 class ResetPasswordMailer extends ApplicationMailer
 {
-    public $folder = 'UserAuthentication.ResetPassword';
-
     public function execute(Entity $user, string $uuid) : void
     {
         $this->user = $user;
