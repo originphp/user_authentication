@@ -86,6 +86,16 @@ To view the API token
 
 > If you are not going to be using API tokens then you can remove the route from `config/routes.php`
 
+## Creating App Source
+
+To install the source into your app, and rename the namespaces, type in
+
+```linux
+$ bin/console user-authentication:install
+```
+
+Then you can delete the plugin and remove the `Plugin::load` command from your bootstrap.
+
 ## What Next
 
 Now its all working fine, it is time to copy the schema for the User Authentication plugin and the queues into your `application/schema.php`.
