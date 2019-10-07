@@ -3,12 +3,16 @@
 namespace UserAuthentication\Model;
 
 use App\Model\ApplicationModel;
-use Origin\Model\Entity;
-use Origin\Utility\Security;
 use ArrayObject;
+use Origin\Model\Entity;
+use Origin\Model\Concern\Delocalizable;
+use Origin\Model\Concern\Timestampable;
+use Origin\Utility\Security;
 
 class User extends ApplicationModel
 {
+    use Delocalizable,Timestampable;
+
     public function initialize(array $config) : void
     {
         parent::initialize($config);
@@ -24,20 +28,33 @@ class User extends ApplicationModel
             'rule' => 'alphaNumeric',
             'rule' => ['minLength', 6]
         ]);
+        // Register callbacks
+        $this->beforeCreate('generateToken');
+        $this->beforeSave('hashPassword');
     }
 
     /**
-     * Before save callback
+     * Callback
      *
      * @param \Origin\Model\Entity $entity
      * @param ArrayObject $options
      * @return bool
      */
-    public function beforeSave(Entity $entity, ArrayObject $options) : bool
+    protected function generateToken(Entity $entity, ArrayObject $options) : bool
     {
-        if ($entity->id === null) {
-            $entity->token = Security::uuid();
-        }
+        $entity->token = Security::uuid();
+        return true;
+    }
+
+    /**
+     * Callback
+     *
+     * @param \Origin\Model\Entity $entity
+     * @param ArrayObject $options
+     * @return bool
+     */
+    protected function hashPassword(Entity $entity, ArrayObject $options) : bool
+    {
         if (!empty($entity->password) and in_array('password', $entity->modified())) {
             $entity->password = Security::hashPassword($entity->password);
         }
