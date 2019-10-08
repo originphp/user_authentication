@@ -2,12 +2,12 @@
 
 namespace UserAuthentication\Model;
 
-use App\Model\ApplicationModel;
 use ArrayObject;
 use Origin\Model\Entity;
+use Origin\Utility\Security;
+use App\Model\ApplicationModel;
 use Origin\Model\Concern\Delocalizable;
 use Origin\Model\Concern\Timestampable;
-use Origin\Utility\Security;
 
 class User extends ApplicationModel
 {
@@ -43,6 +43,7 @@ class User extends ApplicationModel
     protected function generateToken(Entity $entity, ArrayObject $options) : bool
     {
         $entity->token = Security::uuid();
+
         return true;
     }
 
@@ -55,9 +56,10 @@ class User extends ApplicationModel
      */
     protected function hashPassword(Entity $entity, ArrayObject $options) : bool
     {
-        if (!empty($entity->password) and in_array('password', $entity->modified())) {
+        if (! empty($entity->password) and in_array('password', $entity->modified())) {
             $entity->password = Security::hashPassword($entity->password);
         }
+
         return true;
     }
 
@@ -75,6 +77,7 @@ class User extends ApplicationModel
             list($account, $domain) = explode('@', $email);
             getmxrr($domain, $mxhosts, $weight);
         }
-        return !empty($mxhosts);
+
+        return ! empty($mxhosts);
     }
 }

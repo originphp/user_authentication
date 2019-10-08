@@ -1,17 +1,17 @@
 <?php
 namespace UserAuthentication\Test\Mailer;
 
-use Origin\TestSuite\OriginTestCase;
-use Origin\Model\Entity;
-use UserAuthentication\Mailer\ResetPasswordMailer;
-use Origin\Utility\Security;
 use Origin\Core\Config;
+use Origin\Model\Entity;
+use Origin\Utility\Security;
+use Origin\TestSuite\OriginTestCase;
+use UserAuthentication\Mailer\ResetPasswordMailer;
 
 class ResetPasswordMailerTest extends OriginTestCase
 {
     public function testExecute()
     {
-        $user = new Entity(['name'=>'User']);
+        $user = new Entity(['name' => 'User']);
         $user->first_name = 'Jim';
         $user->email = 'jim@originphp.com';
 

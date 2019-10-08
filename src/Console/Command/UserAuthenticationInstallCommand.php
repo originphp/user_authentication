@@ -1,8 +1,8 @@
 <?php
 namespace UserAuthentication\Console\Command;
 
-use Origin\Console\Command\Command;
 use Origin\Utility\Folder;
+use Origin\Console\Command\Command;
 
 class UserAuthenticationInstallCommand extends Command
 {
@@ -13,7 +13,7 @@ class UserAuthenticationInstallCommand extends Command
 
     public function initialize() : void
     {
-        $this->addOption('force', ['description'=>'Force overwriting files','type'=>'boolean']);
+        $this->addOption('force', ['description' => 'Force overwriting files','type' => 'boolean']);
     }
  
     public function execute() : void
@@ -28,11 +28,11 @@ class UserAuthenticationInstallCommand extends Command
                     continue;
                 }
                 $destination = str_replace(
-                    [self::PATH . DS . 'src',self::PATH . DS . 'tests',self::PATH . DS . 'public' ],
+                    [self::PATH . DS . 'src',self::PATH . DS . 'tests',self::PATH . DS . 'public'],
                     [ROOT . DS . 'app',ROOT . DS . 'tests',ROOT  . DS . 'public'],
                     $file['path']
                 );
-                $source =  $file['path'] . DS . $file['name'];
+                $source = $file['path'] . DS . $file['name'];
                 $destination .= DS . $file['name'];
                 $contents = $this->getContents($source);
                 if ($this->io->createFile($destination, $contents, $this->options('force'))) {
@@ -56,6 +56,7 @@ class UserAuthenticationInstallCommand extends Command
         $contents = file_get_contents($source);
         $contents = str_replace('UserAuthentication\\', 'App\\', $contents);
         $contents = str_replace('UserAuthentication.', '', $contents);
+
         return $contents;
     }
 }

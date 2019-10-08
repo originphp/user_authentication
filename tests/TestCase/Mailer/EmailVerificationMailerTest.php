@@ -1,16 +1,16 @@
 <?php
 namespace UserAuthentication\Test\Mailer;
 
+use Origin\Core\Config;
+use Origin\Model\Entity;
 use Origin\TestSuite\OriginTestCase;
 use UserAuthentication\Mailer\EmailVerificationMailer;
-use Origin\Model\Entity;
-use Origin\Core\Config;
 
 class EmailVerificationMailerTest extends OriginTestCase
 {
     public function testExecute()
     {
-        $user = new Entity(['name'=>'User']);
+        $user = new Entity(['name' => 'User']);
         $user->first_name = 'Jim';
         $user->email = 'jim@originphp.com';
         $url = Config::read('App.url');

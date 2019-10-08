@@ -1,9 +1,10 @@
 <?php
 namespace UserAuthentication\Test\Controller;
 
+use Origin\Utility\Security;
 use Origin\TestSuite\OriginTestCase;
 use Origin\TestSuite\IntegrationTestTrait;
-use Origin\Utility\Security;
+
 /**
  * # IMPORTANT
  * For integration testing to work you need to load the AuthComponent in the AppController and for the Plugin to be loaded
@@ -15,7 +16,7 @@ class UsersControllerTest extends OriginTestCase
 {
     use IntegrationTestTrait;
 
-    public $fixtures = ['UserAuthentication.User'];
+    protected $fixtures = ['UserAuthentication.User'];
 
     public function startup() : void
     {
@@ -32,8 +33,8 @@ class UsersControllerTest extends OriginTestCase
     public function testLoginPost()
     {
         $this->post('/login', [
-            'email'=>'jon.snow@originphp.com','password'=>123456
-            ]);
+            'email' => 'jon.snow@originphp.com','password' => 123456
+        ]);
         $this->assertRedirect(); // depends on config
     }
 
@@ -47,8 +48,8 @@ class UsersControllerTest extends OriginTestCase
     public function testForgotPasswordPost()
     {
         $this->post('/forgot_password', [
-            'email'=>'jon.snow@originphp.com'
-            ]);
+            'email' => 'jon.snow@originphp.com'
+        ]);
         $this->assertResponseOk();
         $this->assertResponseContains('If the email address is found an email will be sent');
     }
@@ -95,8 +96,6 @@ class UsersControllerTest extends OriginTestCase
         $this->assertResponseOk();
         $this->assertResponseContains('<p>Enter the verification code you received in the email.</p>');
     }
-
-    
 
     public function testVerifyPost()
     {

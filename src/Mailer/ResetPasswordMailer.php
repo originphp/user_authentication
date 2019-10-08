@@ -1,9 +1,9 @@
 <?php
 namespace UserAuthentication\Mailer;
 
-use App\Mailer\ApplicationMailer;
 use Origin\Core\Config;
 use Origin\Model\Entity;
+use App\Mailer\ApplicationMailer;
 
 class ResetPasswordMailer extends ApplicationMailer
 {

@@ -1,15 +1,15 @@
 <?php
 namespace UserAuthentication\Test\Mailer;
 
+use Origin\Model\Entity;
 use Origin\TestSuite\OriginTestCase;
 use UserAuthentication\Mailer\WelcomeEmailMailer;
-use Origin\Model\Entity;
 
 class WelcomeEmailMailerTest extends OriginTestCase
 {
     public function testExecute()
     {
-        $user = new Entity([], ['name'=>'User']);
+        $user = new Entity([], ['name' => 'User']);
         $user->first_name = 'Jim';
         $user->email = 'jim@originphp.com';
 

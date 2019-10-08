@@ -1,28 +1,28 @@
 <?php
 namespace UserAuthentication\Http\Controller;
 
-use App\Http\Controller\ApplicationController;
 use Origin\Model\Entity;
-use UserAuthentication\Mailer\EmailVerificationMailer;
-use UserAuthentication\Mailer\ResetPasswordMailer;
-use UserAuthentication\Mailer\WelcomeEmailMailer;
+use Origin\Utility\Security;
 use Origin\Exception\InternalErrorException;
 use Origin\Http\Exception\NotFoundException;
-use Origin\Utility\Security;
+use App\Http\Controller\ApplicationController;
+use UserAuthentication\Mailer\WelcomeEmailMailer;
+use UserAuthentication\Mailer\ResetPasswordMailer;
+use UserAuthentication\Mailer\EmailVerificationMailer;
 
 /**
  * @property \UserAuthentication\Model\User $User
  */
 class UsersController extends ApplicationController
 {
-    public $layout = 'UserAuthentication.form';
+    protected $layout = 'UserAuthentication.form';
     
     public function initialize() : void
     {
         parent::initialize();
         $this->Auth->allow([
             'signup', 'verify', 'forgot_password', 'change_password'
-            ]);
+        ]);
     }
    
     public function signup()
@@ -54,9 +54,11 @@ class UsersController extends ApplicationController
             if ($user) {
                 if (! $user->verified or strtotime($user->verified . ' + 30 days') < time()) {
                     $this->sendEmailVerificationMailer($user);
+
                     return $this->redirect('/verify');
                 }
                 $this->Auth->login($user);
+
                 return $this->redirect($this->Auth->redirectUrl());
             }
             $this->Flash->error(__('Incorrect username or password.'));
@@ -75,6 +77,7 @@ class UsersController extends ApplicationController
                 $userId = $this->Session->read('Verification.user_id');
                 $this->User->updateColumn($userId, 'verified', date('Y-m-d H:i:s'));
                 $this->Flash->success(__('You have been verified, you can now login.'));
+
                 return $this->redirect('/login');
             } else {
                 $this->Flash->error(__('Invalid verification code'));
