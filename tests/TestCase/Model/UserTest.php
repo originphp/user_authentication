@@ -8,7 +8,7 @@ use Origin\TestSuite\OriginTestCase;
  */
 class UserTest extends OriginTestCase
 {
-    public $fixtures = ['UserAuthentication.User'];
+    protected $fixtures = ['UserAuthentication.User'];
 
     public function startup() : void
     {

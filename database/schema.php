@@ -5,7 +5,7 @@ class ApplicationSchema extends Schema
 {
     const VERSION = 20190904013421;
 
-    public $users = [
+    protected $users = [
         'columns' => [
             'id' => ['type' => 'integer', 'limit' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'autoIncrement' => true],
             'first_name' => ['type' => 'string', 'limit' => 40, 'null' => false, 'default' => null],
