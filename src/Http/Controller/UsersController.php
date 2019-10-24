@@ -3,7 +3,7 @@ namespace UserAuthentication\Http\Controller;
 
 use Origin\Model\Entity;
 use Origin\Utility\Security;
-use Origin\Exception\InternalErrorException;
+use Origin\Http\Exception\InternalErrorException;
 use Origin\Http\Exception\NotFoundException;
 use App\Http\Controller\ApplicationController;
 use UserAuthentication\Mailer\WelcomeEmailMailer;
