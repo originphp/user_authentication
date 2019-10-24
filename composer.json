@@ -18,8 +18,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "UserAuthentication\\Test\\": "tests/",
-            "Origin\\Test\\": "vendor/originphp/framework/tests/"
+            "UserAuthentication\\Test\\": "tests/"
         }
     },
     "extra": {
