@@ -4,7 +4,7 @@ namespace UserAuthentication\Model;
 
 use ArrayObject;
 use Origin\Model\Entity;
-use Origin\Utility\Security;
+use Origin\Security\Security;
 use App\Model\ApplicationModel;
 use Origin\Model\Concern\Delocalizable;
 use Origin\Model\Concern\Timestampable;

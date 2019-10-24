@@ -4,34 +4,20 @@ The User Authentication plugin, provides user registration, sending a welcome em
 
 ## Installation
 
-### Automated
-
-Install the the `UserAuthentication` plugin using the `plugin:install` command
+Install the the `UserAuthentication` plugin
 
 ```linux
-$ bin/console plugin:install originphp/user_authentication
-```
-
-> The plugin:install command requires that the git command line tools are installed
-
-### Manually
-
-To install the plugin manually, download the source into `plugins/user_authentication`.
-
-Add the following line to `config/bootstrap.php`
-
-```php
-Plugin::load('UserAuthentication');
+$ composer require originphp/user_authentication
 ```
 
 ## Setup
 
-Load the `AuthComponent` in the `AppLicationcontroller` initialize method.
+Load the `AuthComponent` in the `AppController` initialize method.
 
 ```php
-class AppLicationcontroller extends Controller
+class AppController extends Controller
 {
-    public function initialize()
+    protected function initialize() : void
     {
         $this->loadComponent('Auth', [
             'loginAction' => '/login',
@@ -70,7 +56,7 @@ To login
 
 [http://localhost:8000/login](http://localhost:8000/login)
 
-> This will take you to the  `loginRedirect` setting you setup in your AppLicationcontroller
+> This will take you to the  `loginRedirect` setting you setup in your AppController
 
 To start the password reset process
 
@@ -93,6 +79,7 @@ To install the source into your app, and rename the namespaces, type in
 ```linux
 $ bin/console user-authentication:install
 ```
+> You will need to copy the routes from the `routes.php` file
 
 Then you can delete the plugin and remove the `Plugin::load` command from your bootstrap.
 
@@ -102,11 +89,11 @@ Now its all working fine, it is time to copy the schema for the User Authenticat
 
 ## Testing The Plugin
 
-The controller integration test requires your `AppLicationcontroller` loads the `AuthComponent`, but other tests will run fine without this.
+The controller integration test requires your `AppController` loads the `AuthComponent`, but other tests will run fine without this.
 
 Load the schema for the `UserAuthentication` plugin and queues into the test database
 
 ```linux
-$ bin/console db:schema:load --datasource=test UserAuthentication.schema
-$ bin/console db:schema:load --datasource=test queue
+$ bin/console db:schema:load --connection=test UserAuthentication.schema
+$ bin/console db:schema:load --connection=test queue
 ```

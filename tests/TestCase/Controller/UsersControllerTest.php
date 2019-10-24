@@ -1,7 +1,7 @@
 <?php
 namespace UserAuthentication\Test\Controller;
 
-use Origin\Utility\Security;
+use Origin\Security\Security;
 use Origin\TestSuite\OriginTestCase;
 use Origin\TestSuite\IntegrationTestTrait;
 

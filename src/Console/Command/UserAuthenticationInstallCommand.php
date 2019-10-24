@@ -1,7 +1,7 @@
 <?php
 namespace UserAuthentication\Console\Command;
 
-use Origin\Utility\Folder;
+use Origin\Filesystem\Folder;
 use Origin\Console\Command\Command;
 
 class UserAuthenticationInstallCommand extends Command
