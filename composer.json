@@ -22,6 +22,6 @@
         }
     },
     "extra": {
-        "install": "plugins/user_authentication"
+        "install": "/plugins/user_authentication"
      }
 }
