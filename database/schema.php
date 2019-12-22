@@ -15,7 +15,7 @@ class ApplicationSchema extends Schema
             'description' => ['type' => 'text', 'null' => true, 'default' => null],
             'token' => ['type' => 'text', 'limit' => 60, 'null' => false, 'default' => null],
             'verified' => ['type' => 'datetime', 'null' => true, 'default' => null],
-            'created' => ['type' => 'datetime', 'null' => true, 'default' => null],
+            'created' => ['type' => 'datetime', 'null' => false, 'default' => null],
             'modified' => ['type' => 'datetime', 'null' => false, 'default' => null]
         ],
         'constraints' => [
