@@ -2,6 +2,13 @@
 use Origin\Http\Router;
 
 /**
+ * # # # Important # # #
+ *
+ * If you have used the user-authentication:install and are copying these, you will need to
+ * remove the plugin key and value.
+ */
+
+/**
  * Core Routes
  */
 Router::add('/login', ['controller'=>'Users','action'=>'login','plugin'=>'UserAuthentication']);
