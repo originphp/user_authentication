@@ -25,8 +25,8 @@ class User extends ApplicationModel
             ['rule' => 'isUnique', 'message' => 'Email address already in use', 'allowBlank' => true],
         ]);
         $this->validate('password', [
-            'rule' => 'alphaNumeric',
-            'rule' => ['minLength', 6]
+            ['rule' => 'alphaNumeric', 'message' => 'Alpha numeric characters only'],
+            ['rule' => ['minLength', 6], 'message' => 'Minimum length of 6 required']
         ]);
         // Register callbacks
         $this->beforeCreate('generateToken');
