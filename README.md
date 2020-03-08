@@ -84,7 +84,11 @@ Copy and paste the routes from `plugins/user_authentication/config/routes.php` t
 
 Copy the database schema from `plugins/user_authentication/database/schema.php` either into your existing schema file `database/schema.php` or into a new file.
 
-Then you can delete the plugin and remove the `Plugin::load` command from your bootstrap.
+Uninstall the Plugin
+
+```linux
+$ composer remove originphp/user_authentication
+```
 
 ## What Next
 
