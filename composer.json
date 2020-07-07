@@ -4,7 +4,7 @@
     "type": "originphp-plugin",
     "license": "MIT",
     "require": {
-        "originphp/framework": "^2.0",
+        "originphp/http": "^3.0",
         "originphp/filesystem": "^1.0",
         "originphp/plugin-installer": "^1.3"
     },

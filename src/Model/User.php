@@ -21,7 +21,7 @@ class User extends ApplicationModel
         $this->validate('last_name', 'required');
         $this->validate('email', [
             'required',
-            ['rule' => 'customEmail', 'allowBlank' => false, 'message' => 'Invalid email address'],
+            ['rule' => 'customEmail', 'message' => 'Invalid email address'],
             ['rule' => 'isUnique', 'message' => 'Email address already in use', 'allowBlank' => true],
         ]);
         $this->validate('password', [
