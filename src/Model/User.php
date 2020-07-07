@@ -17,10 +17,10 @@ class User extends ApplicationModel
     {
         parent::initialize($config);
 
-        $this->validate('first_name', 'notBlank');
-        $this->validate('last_name', 'notBlank');
+        $this->validate('first_name', 'required');
+        $this->validate('last_name', 'required');
         $this->validate('email', [
-            ['rule' => 'notBlank'],
+            'required',
             ['rule' => 'customEmail', 'allowBlank' => false, 'message' => 'Invalid email address'],
             ['rule' => 'isUnique', 'message' => 'Email address already in use', 'allowBlank' => true],
         ]);
