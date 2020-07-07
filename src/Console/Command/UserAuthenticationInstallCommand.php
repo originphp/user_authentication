@@ -46,7 +46,7 @@ class UserAuthenticationInstallCommand extends Command
         $this->io->nl();
         $this->out([
             '<yellow>Next Steps</yellow>',
-            '<white>1. copy the routes that you need from <cyan>config/routes.php</cyan>.</white>',
+            '<white>1. copy the routes that you need from <cyan>config/routes.php</cyan> and remove the plugin setting.</white>',
             '<white>2. copy <cyan>database/schema.php</cyan> into your schema or use <cyan>db:schema:load UserAuthentication.schema</cyan></white>',
         ]);
     }
