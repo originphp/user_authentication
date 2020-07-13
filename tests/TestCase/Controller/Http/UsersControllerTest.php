@@ -1,5 +1,5 @@
 <?php
-namespace UserAuthentication\Test\Controller;
+namespace UserAuthentication\Test\Http\Controller;
 
 use Origin\Security\Security;
 use Origin\TestSuite\OriginTestCase;
