@@ -7,7 +7,7 @@ use App\Mailer\ApplicationMailer;
 
 class EmailVerificationMailer extends ApplicationMailer
 {
-    public function execute(Entity $user, int $code) : void
+    public function execute(Entity $user, int $code): void
     {
         $this->user = $user;
         $this->url = Config::read('App.url');

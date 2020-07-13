@@ -7,7 +7,7 @@ use App\Mailer\ApplicationMailer;
 
 class ResetPasswordMailer extends ApplicationMailer
 {
-    public function execute(Entity $user, string $uuid) : void
+    public function execute(Entity $user, string $uuid): void
     {
         $this->user = $user;
         $this->url = Config::read('App.url') . '/change_password/' . $uuid;

@@ -3,9 +3,9 @@ namespace UserAuthentication\Http\Controller;
 
 use Origin\Model\Entity;
 use Origin\Security\Security;
-use Origin\Http\Exception\InternalErrorException;
 use Origin\Http\Exception\NotFoundException;
 use App\Http\Controller\ApplicationController;
+use Origin\Http\Exception\InternalErrorException;
 use UserAuthentication\Mailer\WelcomeEmailMailer;
 use UserAuthentication\Mailer\ResetPasswordMailer;
 use UserAuthentication\Mailer\EmailVerificationMailer;
@@ -17,7 +17,7 @@ class UsersController extends ApplicationController
 {
     protected $layout = 'UserAuthentication.form';
     
-    public function initialize() : void
+    public function initialize(): void
     {
         parent::initialize();
         $this->Auth->allow([

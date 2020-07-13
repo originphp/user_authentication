@@ -13,7 +13,7 @@ class User extends ApplicationModel
 {
     use Delocalizable,Timestampable;
 
-    public function initialize(array $config) : void
+    public function initialize(array $config): void
     {
         parent::initialize($config);
 
@@ -40,7 +40,7 @@ class User extends ApplicationModel
      * @param ArrayObject $options
      * @return bool
      */
-    protected function generateToken(Entity $entity, ArrayObject $options) : bool
+    protected function generateToken(Entity $entity, ArrayObject $options): bool
     {
         $entity->token = Security::uuid();
 
@@ -54,7 +54,7 @@ class User extends ApplicationModel
      * @param ArrayObject $options
      * @return bool
      */
-    protected function hashPassword(Entity $entity, ArrayObject $options) : bool
+    protected function hashPassword(Entity $entity, ArrayObject $options): bool
     {
         if (! empty($entity->password) && in_array('password', $entity->modified())) {
             $entity->password = Security::hashPassword($entity->password);
@@ -70,7 +70,7 @@ class User extends ApplicationModel
      * @param string $email
      * @return bool
      */
-    public function customEmail(string $email) : bool
+    public function customEmail(string $email): bool
     {
         $mxhosts = null;
         if (filter_var($email, FILTER_VALIDATE_EMAIL) !== false) {

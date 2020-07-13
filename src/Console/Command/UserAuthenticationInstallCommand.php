@@ -11,12 +11,12 @@ class UserAuthenticationInstallCommand extends Command
     
     const PATH = PLUGINS . DS . 'user_authentication';
 
-    public function initialize() : void
+    public function initialize(): void
     {
         $this->addOption('force', ['description' => 'Force overwriting files','type' => 'boolean']);
     }
  
-    public function execute() : void
+    public function execute(): void
     {
         $blacklist = ['UserAuthenticationInstallCommand.php'];
 
@@ -51,7 +51,7 @@ class UserAuthenticationInstallCommand extends Command
         ]);
     }
 
-    private function getContents(string $source) : string
+    private function getContents(string $source): string
     {
         $contents = file_get_contents($source);
         $contents = str_replace('UserAuthentication\\', 'App\\', $contents);

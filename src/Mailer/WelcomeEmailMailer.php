@@ -7,7 +7,7 @@ use App\Mailer\ApplicationMailer;
 
 class WelcomeEmailMailer extends ApplicationMailer
 {
-    public function execute(Entity $user) : void
+    public function execute(Entity $user): void
     {
         $this->user = $user;
         $this->url = Config::read('App.url');
