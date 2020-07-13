@@ -52,7 +52,7 @@ class UsersController extends ApplicationController
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {
-                if (! $user->verified or strtotime($user->verified . ' + 30 days') < time()) {
+                if (! $user->verified || strtotime($user->verified . ' + 30 days') < time()) {
                     $this->sendEmailVerificationMailer($user);
 
                     return $this->redirect('/verify');
@@ -73,7 +73,7 @@ class UsersController extends ApplicationController
             $verificationCode = (int) $this->Session->read('Verification.code');
             $postedCode = (int) $this->request->data('code');
           
-            if ($postedCode and $postedCode === $verificationCode) {
+            if ($postedCode && $postedCode === $verificationCode) {
                 $userId = $this->Session->read('Verification.user_id');
                 $this->User->updateColumn($userId, 'verified', date('Y-m-d H:i:s'));
                 $this->Flash->success(__('You have been verified, you can now login.'));
@@ -112,7 +112,7 @@ class UsersController extends ApplicationController
     {
         $user = $this->User->new();
 
-        if (is_null($code) or $code != $this->Session->read('PasswordReset.code')) {
+        if (is_null($code) || $code != $this->Session->read('PasswordReset.code')) {
             throw new NotFoundException('Not found');
         }
         if ($this->request->is(['post'])) {

@@ -56,7 +56,7 @@ class User extends ApplicationModel
      */
     protected function hashPassword(Entity $entity, ArrayObject $options) : bool
     {
-        if (! empty($entity->password) and in_array('password', $entity->modified())) {
+        if (! empty($entity->password) && in_array('password', $entity->modified())) {
             $entity->password = Security::hashPassword($entity->password);
         }
 
