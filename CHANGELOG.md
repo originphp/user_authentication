@@ -2,6 +2,10 @@
 
 ## [3.0.1] - 2020-07-22
 
+### Added
+
+- Added `UserEntity`
+
 ### Fixed 
 
 - Fixed issues caused by refactoring
