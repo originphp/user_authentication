@@ -1,5 +1,5 @@
 <?php
-namespace UserAuthentication\Test\Http\Controller;
+namespace App\Test\Http\Controller;
 
 use Origin\Security\Security;
 use Origin\TestSuite\OriginTestCase;
@@ -16,11 +16,12 @@ class UsersControllerTest extends OriginTestCase
 {
     use IntegrationTestTrait;
 
-    protected $fixtures = ['UserAuthentication.User'];
+    protected $fixtures = ['User'];
 
-    public function startup(): void
+    public function setUp(): void
     {
-        $this->loadModel('UserAuthentication.User');
+        parent::setUp();
+        $this->loadModel('User');
     }
 
     public function testLogin()
@@ -80,8 +81,9 @@ class UsersControllerTest extends OriginTestCase
             'PasswordReset.code' => $uid
         ]);
         $this->post('/change_password/' . $uid, [
-            'password' => 'foo-12345'
+            'password' => 'foo12345'
         ]);
+
         $this->assertRedirect('/login');
     }
 

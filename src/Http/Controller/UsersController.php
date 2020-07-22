@@ -1,21 +1,20 @@
 <?php
-namespace UserAuthentication\Http\Controller;
+namespace App\Http\Controller;
 
 use Origin\Model\Entity;
 use Origin\Security\Security;
+use App\Mailer\WelcomeEmailMailer;
+use App\Mailer\ResetPasswordMailer;
+use App\Mailer\EmailVerificationMailer;
 use Origin\Http\Exception\NotFoundException;
-use App\Http\Controller\ApplicationController;
 use Origin\Http\Exception\InternalErrorException;
-use UserAuthentication\Mailer\WelcomeEmailMailer;
-use UserAuthentication\Mailer\ResetPasswordMailer;
-use UserAuthentication\Mailer\EmailVerificationMailer;
 
 /**
- * @property \UserAuthentication\Model\User $User
+ * @property \App\Model\User $User
  */
 class UsersController extends ApplicationController
 {
-    protected $layout = 'UserAuthentication.form';
+    protected $layout = 'form';
     
     public function initialize(): void
     {
@@ -27,6 +26,14 @@ class UsersController extends ApplicationController
    
     public function signup()
     {
+        /**
+         * Disable form signup if users alread set up
+         * This is here temporary until install is setup
+         */
+        if ($this->User->count() > 1) {
+            throw new NotFoundException();
+        }
+
         $user = $this->User->new();
 
         if ($this->request->is(['post'])) {
@@ -92,8 +99,10 @@ class UsersController extends ApplicationController
         if ($this->request->is(['post'])) {
             $user = $this->User->new($this->request->data());
 
-            # Overwrite validation rule for email
-            $this->User->validate('email', 'email');
+            // overwrite validation rules
+            $this->User->validate('first_name', 'notBlank');
+            $this->User->validate('last_name', 'notBlank');
+            $this->User->validate('email', 'notBlank');
 
             if ($this->User->validates($user)) {
                 $user = $this->User->find('first', [
@@ -116,9 +125,9 @@ class UsersController extends ApplicationController
             throw new NotFoundException('Not found');
         }
         if ($this->request->is(['post'])) {
-            $user->id = $this->Session->read('PasswordReset.user_id');
-       
+            $user = $this->User->get($this->Session->read('PasswordReset.user_id'));
             $user->password = $this->request->data('password');
+
             if ($this->User->save($user)) {
                 $this->Flash->success(__('Your password has been changed.'));
                 $this->Session->delete('PasswordReset.code');

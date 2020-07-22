@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.1] - 2020-07-22
+
+### Fixed 
+
+- Fixed issues caused by refactoring
+
 ## [3.0.0] - 2020-07-22
 
 ### Changed
