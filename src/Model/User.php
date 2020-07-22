@@ -22,7 +22,7 @@ class User extends ApplicationModel
         $this->validate('email', [
             'required',
             ['rule' => 'customEmail', 'message' => 'Invalid email address'],
-            ['rule' => 'isUnique', 'message' => 'Email address already in use', 'allowBlank' => true],
+            ['rule' => 'isUnique', 'message' => 'Email address already in use'],
         ]);
         $this->validate('password', [
             ['rule' => 'alphaNumeric', 'message' => 'Alpha numeric characters only'],
