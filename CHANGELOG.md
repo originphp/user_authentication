@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.2] - 2020-08-24
+
+### Changed
+
+- Changed User Entity inline with recent deprecation
+
 ## [3.0.1] - 2020-07-22
 
 ### Added

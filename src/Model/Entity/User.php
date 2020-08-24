@@ -5,7 +5,7 @@ use Origin\Model\Entity;
 
 class User extends Entity
 {
-    protected $_virtual = ['name'];
+    protected $virtual = ['name'];
 
     protected function getName()
     {
