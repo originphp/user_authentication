@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.1.0] - 2020-10-06
+
+### Changed
+
+- Changed Filesystem min version to 2.0 to be compatiable with new projects.
+
 ## [3.0.2] - 2020-08-24
 
 ### Changed
