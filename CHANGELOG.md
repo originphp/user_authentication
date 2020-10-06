@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.1.1] - 2020-10-06
+
+### Fixed
+
+- Fixed install command due to changes in Filesystem
+
 ## [3.1.0] - 2020-10-06
 
 ### Changed

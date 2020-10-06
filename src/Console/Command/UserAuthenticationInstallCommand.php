@@ -32,9 +32,9 @@ class UserAuthenticationInstallCommand extends Command
                     [ROOT . DS . 'app',ROOT . DS . 'tests',ROOT  . DS . 'public'],
                     $file['path']
                 );
-                $source = $file['path'] . DS . $file['name'];
+         
                 $destination .= DS . $file['name'];
-                $contents = $this->getContents($source);
+                $contents = $this->getContents($file);
                 if ($this->io->createFile($destination, $contents, $this->options('force'))) {
                     $this->io->status('ok', $destination);
                 } else {
