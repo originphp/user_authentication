@@ -33,7 +33,6 @@ class UserAuthenticationInstallCommand extends Command
                     $file['path']
                 );
          
-                $destination .= DS . $file['name'];
                 $contents = $this->getContents($file);
                 if ($this->io->createFile($destination, $contents, $this->options('force'))) {
                     $this->io->status('ok', $destination);
