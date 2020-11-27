@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.1.2] - 2020-11-27
+
+### Fixed
+
+- Fixed default namespaces
+
 ## [3.1.1] - 2020-10-06
 
 ### Fixed

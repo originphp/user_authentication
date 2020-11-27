@@ -1,20 +1,21 @@
 <?php
-namespace App\Http\Controller;
+namespace UserAuthentication\Http\Controller;
 
 use Origin\Model\Entity;
 use Origin\Security\Security;
-use App\Mailer\WelcomeEmailMailer;
-use App\Mailer\ResetPasswordMailer;
-use App\Mailer\EmailVerificationMailer;
 use Origin\Http\Exception\NotFoundException;
+use App\Http\Controller\ApplicationController;
 use Origin\Http\Exception\InternalErrorException;
+use UserAuthentication\Mailer\WelcomeEmailMailer;
+use UserAuthentication\Mailer\ResetPasswordMailer;
+use UserAuthentication\Mailer\EmailVerificationMailer;
 
 /**
- * @property \App\Model\User $User
+ * @property \UserAuthentication\Model\User $User
  */
 class UsersController extends ApplicationController
 {
-    protected $layout = 'form';
+    protected $layout = 'UserAuthentication.form';
     
     public function initialize(): void
     {
