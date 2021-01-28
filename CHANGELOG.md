@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.2.0] - 2021-01-28
+
+### Changed
+
+- Changed versions to support newer versions
+
 ## [3.1.2] - 2020-11-27
 
 ### Fixed
