@@ -18,7 +18,6 @@ Router::add('/change_password/*', ['controller'=>'Users','action'=>'change_passw
 Router::add('/profile', ['controller'=>'Users','action'=>'profile','plugin'=>'UserAuthentication']);
 Router::add('/signup', ['controller'=>'Users','action'=>'signup','plugin'=>'UserAuthentication']);
 Router::add('/verify', ['controller'=>'Users','action'=>'verify','plugin'=>'UserAuthentication']);
-Router::add('/profile', ['controller'=>'Users','action'=>'verify','plugin'=>'UserAuthentication']);
 
 /**
  * Remove any of these if you don't need them
