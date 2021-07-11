@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.3.0] - 2021-07-11
+
+### Fixed
+
+- Fixed exception thrown when debug bar not available
+
 ## [3.2.0] - 2021-01-28
 
 ### Changed
@@ -36,7 +42,7 @@
 
 - Added `UserEntity`
 
-### Fixed 
+### Fixed
 
 - Fixed issues caused by refactoring
 
