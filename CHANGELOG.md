@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.4.0] - 2021-07-14
+
+### Changed
+
+- Changed login to check data via validator first
+
 ## [3.3.0] - 2021-07-11
 
 ### Fixed

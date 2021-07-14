@@ -3,6 +3,7 @@ namespace UserAuthentication\Http\Controller;
 
 use Origin\Model\Entity;
 use Origin\Security\Security;
+use UserAuthentication\Form\LoginForm;
 use Origin\Http\Exception\NotFoundException;
 use App\Http\Controller\ApplicationController;
 use Origin\Http\Exception\InternalErrorException;
@@ -28,8 +29,7 @@ class UsersController extends ApplicationController
     public function signup()
     {
         /**
-         * Disable form signup if users alread set up
-         * This is here temporary until install is setup
+         * Disable form signup if users already setup
          */
         if ($this->User->count() > 1) {
             throw new NotFoundException();
@@ -57,19 +57,31 @@ class UsersController extends ApplicationController
    
     public function login()
     {
+        $loginForm = LoginForm::new();
+
         if ($this->request->is('post')) {
-            $user = $this->Auth->identify();
-            if ($user) {
-                if (! $user->verified || strtotime($user->verified . ' + 30 days') < time()) {
-                    $this->sendEmailVerificationMailer($user);
+            $loginForm = LoginForm::patch($loginForm, $this->request->data(), [
+                'fields' => [
+                    'email','password'
+                ]
+            ]);
 
-                    return $this->redirect('/verify');
+            if ($loginForm->validates()) {
+                $user = $this->Auth->identify();
+                if ($user) {
+                    if (! $user->verified || strtotime($user->verified . ' + 30 days') < time()) {
+                        $this->sendEmailVerificationMailer($user);
+    
+                        return $this->redirect('/verify');
+                    }
+                    $this->Auth->login($user);
+    
+                    return $this->redirect($this->Auth->redirectUrl());
                 }
-                $this->Auth->login($user);
-
-                return $this->redirect($this->Auth->redirectUrl());
+                $this->Flash->error(__('Incorrect username or password.'));
+            } else {
+                $this->Flash->error(__('Please check the form for errors.'));
             }
-            $this->Flash->error(__('Incorrect username or password.'));
         }
     }
 

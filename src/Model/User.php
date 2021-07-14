@@ -21,12 +21,45 @@ class User extends ApplicationModel
         $this->validate('last_name', 'required');
         $this->validate('email', [
             'required',
-            ['rule' => 'customEmail', 'message' => 'Invalid email address'],
-            ['rule' => 'isUnique', 'message' => 'Email address already in use'],
+            [
+                'rule' => 'customEmail',
+                'message' => __('Invalid email address')
+            ],
+            [
+                'rule' => 'isUnique',
+                'message' => __('Email address already in use')
+            ],
+            [
+                'rule' => ['minLength', 3],
+                'message' => __('Minimum length 3 characters')
+            ],
+            [
+                'rule' => ['maxLength',255],
+                'message' => __('Maximum number of 255 characters')
+            ]
         ]);
         $this->validate('password', [
-            ['rule' => 'alphaNumeric', 'message' => 'Alpha numeric characters only'],
-            ['rule' => ['minLength', 6], 'message' => 'Minimum length of 6 required']
+            'required',
+            [
+                'rule' => '/[0-9]/',
+                'message' => __('Must contain at least one digit')
+            ],
+            [
+                'rule' => '/[a-z]/',
+                'message' => __('Must contain at least one lowercase letter')
+            ],
+            [
+                'rule' => '/[A-Z]/',
+                'message' => __('Must contain at least one uppercase letter')
+            ],
+            [
+                'rule' => ['minLength', 8],
+                'message' => __('Minimum length 8 characters')
+            ],
+            [
+                'rule' => ['maxLength',32],
+                'message' => __('Maximum number of 32 characters')
+            ]
         ]);
         // Register callbacks
         $this->beforeCreate('generateToken');
