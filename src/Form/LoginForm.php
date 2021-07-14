@@ -18,5 +18,39 @@ class LoginForm extends Record
      */
     protected function initialize(): void
     {
+        $this->addField('email', [
+            'type' => 'string',
+            'length' => 255
+        ]);
+
+        $this->addField('password', [
+            'type' => 'string',
+            'length' => 32
+        ]);
+
+        $this->validate('email', [
+            'required',
+            'email',
+            'min' => [
+                'rule' => ['minLength', 3],
+                'message' => __('Invalid email address')
+            ],
+            'max' => [
+                'rule' => ['maxLength',255],
+                'message' => __('Invalid email address')
+            ]
+        ]);
+        
+        $this->validate('password', [
+            'required',
+            'min' => [
+                'rule' => ['minLength', 8],
+                'message' => __('Invalid password')
+            ],
+            'max' => [
+                'rule' => ['maxLength',32],
+                'message' => __('Invalid password')
+            ]
+        ]);
     }
 }

@@ -3,7 +3,7 @@ use Origin\Model\Schema;
 
 class ApplicationSchema extends Schema
 {
-    const VERSION = 20190904013421;
+    const VERSION = 20210714000000;
 
     protected $users = [
         'columns' => [
@@ -11,7 +11,7 @@ class ApplicationSchema extends Schema
             'first_name' => ['type' => 'string', 'limit' => 40, 'null' => false, 'default' => null],
             'last_name' => ['type' => 'string', 'limit' => 80, 'null' => false, 'default' => null],
             'email' => ['type' => 'string', 'limit' => 255, 'null' => true, 'default' => null],
-            'password' => ['type' => 'string', 'limit' => 255, 'null' => false, 'default' => null],
+            'password' => ['type' => 'string', 'limit' => 32, 'null' => false, 'default' => null],
             'description' => ['type' => 'text', 'null' => true, 'default' => null],
             'token' => ['type' => 'text', 'limit' => 60, 'null' => false, 'default' => null],
             'verified' => ['type' => 'datetime', 'null' => true, 'default' => null],

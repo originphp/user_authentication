@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.1] - 2021-07-14
+
+### Fixed
+
+- Fixed missing validation rules
+- Fixed not passing record to form
+
 ## [3.4.0] - 2021-07-14
 
 ### Changed

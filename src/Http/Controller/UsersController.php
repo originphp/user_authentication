@@ -83,6 +83,8 @@ class UsersController extends ApplicationController
                 $this->Flash->error(__('Please check the form for errors.'));
             }
         }
+
+        $this->set(compact('loginForm'));
     }
 
     public function verify()
