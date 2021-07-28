@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.4.2] - 2021-07-28
+
+### Security
+
+- Fixed signup allowing a second user to sign up
+
 ## [3.4.1] - 2021-07-14
 
 ### Fixed

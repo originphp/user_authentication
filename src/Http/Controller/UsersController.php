@@ -31,7 +31,7 @@ class UsersController extends ApplicationController
         /**
          * Disable form signup if users already setup
          */
-        if ($this->User->count() > 1) {
+        if ($this->User->count() > 0) {
             throw new NotFoundException();
         }
 
